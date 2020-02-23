@@ -1,0 +1,8 @@
+local mod = require("module1")
+
+if mod.getn ~= 0 then
+        mod.hello()
+        ngx.say("zoule")
+else
+        ngx.say(mod.tab['20540,21550'])
+end
