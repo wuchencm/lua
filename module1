@@ -1,0 +1,41 @@
+local file, err = io.open("/usr/local/openresty/lualib/test","r")
+local table1 = {}
+
+
+local function Split(szFullString, szSeparator)
+local nFindStartIndex = 1
+local nSplitIndex = 1
+local nSplitArray = {}
+while true do
+   local nFindLastIndex = string.find(szFullString, szSeparator, nFindStartIndex)
+   if not nFindLastIndex then
+    nSplitArray[nSplitIndex] = string.sub(szFullString, nFindStartIndex, string.len(szFullString))
+    break
+   end
+   nSplitArray[nSplitIndex] = string.sub(szFullString, nFindStartIndex, nFindLastIndex - 1)
+   nFindStartIndex = nFindLastIndex + string.len(szSeparator)
+   nSplitIndex = nSplitIndex + 1
+end
+return nSplitArray
+end
+
+
+local function hello()
+        for line in io.lines("/usr/local/openresty/lualib/test") do
+                local str = Split(line,":")
+                table1[str[1]] = str[2]
+        end
+        for k,v in pairs(table1) do
+                ngx.say(k,":",v)
+        end
+
+end
+
+local getn = #table1
+
+local _M ={
+        hello = hello,
+        tab = table1,
+        getn =getn
+}
+return _M
