@@ -1,0 +1,3 @@
+{{range gets "/test/gray/*"}}
+{{replace .Key "/test/gray/" "" 1}}:{{.Value}}
+{{end}}
