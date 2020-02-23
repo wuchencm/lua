@@ -1,0 +1,8 @@
+[template]
+src = "map.tmpl"
+dest = "/usr/local/openresty/nginx/conf/map.conf"
+keys = [
+  "/test/gray/",
+]
+#check_cmd = "/usr/sbin/nginx -t"
+#reload_cmd = "/usr/sbin/nginx -s reload"
